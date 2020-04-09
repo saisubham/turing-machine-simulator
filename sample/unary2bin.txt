@@ -1,0 +1,13 @@
+1111111111111
+q0 1 x l q1
+q0 x x r q0
+q0 y y r q0
+q0 _ _ l q2
+q1 x x l q1
+q1 z y l q1
+q1 _ z r q0
+q1 y z r q0
+q2 x x l q2
+q2 y 0 l q2
+q2 z 1 l q2
+q2 _ _ s q3
