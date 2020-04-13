@@ -1,6 +1,7 @@
 # turing-machine-simulator
 A  simple Turing machine simulator with "stay-feature"
 
+![simulation demo](gif/unary2bin.gif)
 ## Compile
 ```
 $ cd /path_to_turing-machine-simulator/turing-machine-simulator/
