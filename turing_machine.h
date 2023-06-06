@@ -37,7 +37,7 @@ public:
 		num_alphs(0),
 		ptr(0){};
 
-	void displayTape();
+	void displayTape(int);
 	int parseFile();
 	//void initializeTables();
 	void makeTransitionTables();

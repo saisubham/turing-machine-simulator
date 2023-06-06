@@ -1,11 +1,24 @@
 #include "turing_machine.h"
 
-void TuringMachine::displayTape() {
+void TuringMachine::displayTape(int present_state_id) {
+	std::ofstream flog("log.txt", std::ios_base::app);
+
 	std::cout << "\r" << tape.substr(0, ptr);	// display tape contents before the pointer head
+	flog << "\r" << tape.substr(0, ptr);
 	std::cout << "[" << tape[ptr] << "]";		// display tape content under the pointer head
+	flog << "[" << tape[ptr] << "]";
 	std::cout << tape.substr(ptr + 1);			// display tape contents after the pointer head
+	flog << tape.substr(ptr + 1);
+
+	std::string state_name;
+	for (auto it = state_id.begin(); it != state_id.end(); ++it)
+ 	   	if (it->second == present_state_id)
+        		state_name = it->first;
+
+	std::cout << "   " << state_name << "    ";
+	flog << "   " << state_name << "    ";
 	std::cout << std::flush;
-	usleep(200000);
+	_sleep(200);
 }
 
 int TuringMachine::parseFile() {
@@ -47,6 +60,9 @@ int TuringMachine::parseFile() {
 	dir_table = std::vector<std::vector<int>>(num_states, std::vector<int>(num_alphs, 0));
 
 	ifs.close();
+
+	std::ofstream flog("log.txt");
+
 	return 0;
 }
 
@@ -89,7 +105,7 @@ void TuringMachine::makeTransitionTables(){
 void TuringMachine::turingSimulator(){
 	int present_state_id = 0, read_char_id, dir_id = 0;
 
-	displayTape();
+	displayTape(present_state_id);
 	while(true){
 		read_char_id = alph_id.find(tape[ptr])->second;
 		dir_id = dir_table[present_state_id][read_char_id];
@@ -116,6 +132,6 @@ void TuringMachine::turingSimulator(){
 		}
 		if(ptr >= tape.size())
 			tape = tape + "_";
-		displayTape();
+		displayTape(present_state_id);
 	}
 }
