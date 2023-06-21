@@ -1,16 +1,17 @@
-CC=g++
-CFLAGS=-c
+CXX=g++
+CXXFLAGS=
 
-all: tm
+SRC=main.cpp turing_machine.cpp
+OBJ=${SRC:.cpp=.o}
+OUTPUT=tm
 
-tm: main.o turing_machine.o
-	$(CC) main.o turing_machine.o -o tm
+all: ${OUTPUT}
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+tm: ${OBJ}
+	${LINK.cpp} main.o turing_machine.o -o ${OUTPUT}
 
-turing_machine.o: turing_machine.cpp
-	$(CC) $(CFLAGS) turing_machine.cpp
+%.o: %.c
+	${COMPILE.cpp} -c $+ -o $@
 
 clean:
-	rm -rf *.o tm
+	rm -rf ${OBJ} ${OUTPUT}
